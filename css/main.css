@@ -1,0 +1,207 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body
+{
+    font-family: 'Rubik', sans-serif;
+    position: relative;
+}
+
+/* Sets the background image for the wheel */
+td.the_wheel
+{
+    background-image: url(../images/wheel_back.png);
+    background-position: center;
+    background-repeat: none;
+}
+
+/* Do some css reset on selected elements */
+h1, p
+{
+    margin: 0;
+}
+
+div.power_controls
+{
+    margin-right:70px;
+}
+
+div.html5_logo
+{
+    margin-left:70px;
+}
+
+/* Styles for the power selection controls */
+table.power
+{
+    background-color: #cccccc;
+    cursor: pointer;
+    border:1px solid #333333;
+}
+
+table.power th
+{
+    background-color: white;
+    cursor: default;
+}
+/* Style applied to the spin button once a power has been selected */
+.clickable
+{
+    cursor: pointer;
+}
+
+/* Other misc styles */
+.margin_bottom
+{
+    margin-bottom: 5px;
+}
+
+/* ------------------------- */
+.message-container
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../images/6k2.gif);
+    background-position: center;
+    display: none;
+}
+
+.dark-overlay
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000057;
+}
+
+.results-summary-container {
+  display: flex;
+  width: 60%;
+  height: 40%;
+  border-radius: 30px;
+  box-shadow: 10px 20px 20px rgba(120, 87, 255, 0.3);
+  backface-visibility: hidden;
+}
+
+.heading-primary,
+.heading-secondary,
+.heading-tertiary {
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.heading-primary {
+  font-size: 36px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, #f7bb97, #dd5e89);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1.6);
+}
+
+.heading-secondary {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  letter-spacing: 2px;
+}
+
+.heading-tertiary {
+  font-size: 20px;
+  font-weight: 500;
+  color: hsl(221, 100%, 96%);
+}
+
+.paragraph {
+  font-size: 17px;
+  line-height: 1.4;
+  color: hsl(221, 100%, 96%);
+  margin-top: 35px;
+}
+
+.paragraph-text-box {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-1 {
+  margin-bottom: 10px;
+}
+
+
+.content
+{
+    margin: 15% auto;
+}
+
+.results-summary-container__result {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(to bottom, #734b6d, #42275a);
+  animation: gradient 9s infinite alternate linear;
+
+}
+
+ .results-summary-container__result .result-box {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-image: linear-gradient(-45deg, #ef629f, #42275a);
+  background-color: #56ab2f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: gradient 9s linear infinite;
+}
+
+.results-summary-container__result .result {
+  margin-top: -8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: hsl(241, 100%, 89%);
+}
+
+.btn {
+  width: 240px;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #aa076b;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 20px 0 2px 0;
+  transition: all 0.3s;
+}
+
+#messageText
+{
+    font-size: 28px;
+}

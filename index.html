@@ -2,18 +2,27 @@
 
 <head>
     <title>Wheel of fortune</title>
-    <link rel="stylesheet" href="main.css" type="text/css" />
-    <script type="text/javascript" src="./Winwheel.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap');
+    </style>
+    <link rel="stylesheet" href="css/main.css?val=1" type="text/css" />
 </head>
 
 <body>
     <div id="messageModal" class="message-container">
-        <div class="content">
-            <h2>message</h2>
-            <p id="messageText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit aliquid modi laborum explicabo quidem hic nam non, molestiae officia temporibus eligendi voluptas deserunt rem qui!</p>
-            <div>
-                <button onClick="resetWheel(); return false;">play again</button>
+        <div class="dark-overlay"></div>
+        <div class="results-summary-container content">
+            <div class="results-summary-container__result">
+                <div class="result-text-box">
+                    <div class="heading-primary">Excellent</div>
+                    <p id="messageText" class="paragraph">
+                        You scored higher than 65% of the people who have taken these tests.
+                    </p>
+                </div>
+                <div class="summary__cta">
+                    <button onClick="resetWheel(); return false;" class="btn btn__continue playAgain">Continue
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -25,7 +34,7 @@
                         <br />
                         <br />
                         <br />
-                        <img id="spin_button" src="spin_off.png" alt="Spin" onClick="startSpin();" />
+                        <img id="spin_button" src="images/spin_off.png" alt="Spin" onClick="startSpin();" />
                     </div>
                 </td>
                 <td width="438" height="582" class="the_wheel" align="center" valign="center">
@@ -35,143 +44,10 @@
                 </td>
             </tr>
         </table>
-        <script>
 
-            let selectedSegmentIndex = -1;
-            let theWheel;
-            const messageModal = document.querySelector('#messageModal');
-            const messageText = document.querySelector('#messageText');
-            let segments = [
-                { 'fillStyle': '#ee1c24', 'text': '1', 'message': 'this is message 01' },
-                { 'fillStyle': '#3cb878', 'text': '2', 'message': 'this is message 02' },
-                { 'fillStyle': '#f6989d', 'text': '3', 'message': 'this is message 03' },
-                { 'fillStyle': '#00aef0', 'text': '4', 'message': 'this is message 04' },
-                { 'fillStyle': '#f26522', 'text': '5', 'message': 'this is message 05' },
-                { 'fillStyle': '#e70697', 'text': '6', 'message': 'this is message 06' },
-                { 'fillStyle': '#fff200', 'text': '7', 'message': 'this is message 07' },
-                { 'fillStyle': '#f6989d', 'text': '8', 'message': 'this is message 08' },
-                { 'fillStyle': '#ee1c24', 'text': '9', 'message': 'this is message 09' },
-                { 'fillStyle': '#3cb878', 'text': '10', 'message': 'this is message 10' },
-                { 'fillStyle': '#f26522', 'text': '11', 'message': 'this is message 11' },
-                { 'fillStyle': '#a186be', 'text': '12', 'message': 'this is message 12' },
-                { 'fillStyle': '#fff200', 'text': '13', 'message': 'this is message 13' },
-                { 'fillStyle': '#00aef0', 'text': '14', 'message': 'this is message 14' },
-                { 'fillStyle': '#ee1c24', 'text': '15', 'message': 'this is message 15' },
-                { 'fillStyle': '#f6989d', 'text': '16', 'message': 'this is message 16' },
-                { 'fillStyle': '#f26522', 'text': '17', 'message': 'this is message 17' },
-                { 'fillStyle': '#3cb878', 'text': '18', 'message': 'this is message 18' },
-                { 'fillStyle': '#a186be', 'text': '19', 'message': 'this is message 19' },
-                { 'fillStyle': '#fff200', 'text': '20', 'message': 'this is message 20' },
-            ];
-            // Create new wheel object specifying the parameters at creation time.
-            theWheel = new Winwheel({
-                'outerRadius': 212,        // Set outer radius so wheel fits inside the background.
-                'innerRadius': 75,         // Make wheel hollow so segments don't go all way to center.
-                'textFontSize': 24,         // Set default font size for the segments.
-                'textOrientation': 'vertical', // Make text vertial so goes down from the outside of wheel.
-                'textAlignment': 'outer',    // Align text to outside of wheel.
-                'numSegments': segments.length,         // Specify number of segments.
-                'segments':             // Define segments including colour and text.
-                    segments,
-                'animation':           // Specify the animation to use.
-                {
-                    'type': 'spinToStop',
-                    'duration': 10,    // Duration in seconds.
-                    'spins': 3,     // Default number of complete spins.
-                    'callbackFinished': alertPrize,
-                    'callbackSound': playSound,   // Function to call when the tick sound is to be triggered.
-                    'soundTrigger': 'pin'        // Specify pins are to trigger the sound, the other option is 'segment'.
-                },
-                'pins':				// Turn pins on.
-                {
-                    'number': segments.length,
-                    'fillStyle': 'silver',
-                    'outerRadius': 4,
-                }
-            });
-
-            // Loads the tick audio sound in to an audio object.
-            let audio = new Audio('tick.mp3');
-            let clappingSound = new Audio('claping_sms.mp3');
-            // This function is called when the sound is to be played.
-            function playSound() {
-                // Stop and rewind the sound if it already happens to be playing.
-                audio.pause();
-                audio.currentTime = 0;
-
-                // Play the sound.
-                audio.play();
-            }
-
-            // Vars used by the code in this page to do power controls.
-            let wheelPower = 0;
-            let wheelSpinning = false
-            // -------------------------------------------------------
-            // Click handler for spin button.
-            // -------------------------------------------------------
-            function startSpin() {
-                // Ensure that spinning can't be clicked again while already running.
-                if (wheelSpinning == false) {
-                    // Based on the power level selected adjust the number of spins for the wheel, the more times is has
-                    // to rotate with the duration of the animation the quicker the wheel spins.
-                    if (wheelPower == 1) {
-                        theWheel.animation.spins = 3;
-                    } else if (wheelPower == 2) {
-                        theWheel.animation.spins = 6;
-                    } else if (wheelPower == 3) {
-                        theWheel.animation.spins = 10;
-                    }
-
-                    // Disable the spin button so can't click again while wheel is spinning.
-                    document.getElementById('spin_button').src = "spin_off.png";
-                    document.getElementById('spin_button').className = "";
-
-                    // Begin the spin animation by calling startAnimation on the wheel object.
-                    theWheel.startAnimation();
-
-                    // Set to true so that power can't be changed and spin button re-enabled during
-                    // the current animation. The user will have to reset before spinning again.
-                    wheelSpinning = true;
-                }
-            }
-
-            // -------------------------------------------------------
-            // Function for reset button.
-            // -------------------------------------------------------
-            function resetWheel() {
-                theWheel.stopAnimation(false);  // Stop the animation, false as param so does not call callback function.
-                if (theWheel.numSegments == 1) {
-                    window.location = './result.html'
-                }
-                hideMessage();
-                theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.r
-
-                theWheel.deleteSegment(selectedSegmentIndex);
-                theWheel.pins.number = theWheel.numSegments;
-                theWheel.draw();                // Call draw to render changes to the wheel.
-                wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
-            }
-
-            // -------------------------------------------------------
-            // Called when the spin animation has finished by the callback feature of the wheel because I specified callback in the parameters.
-            // -------------------------------------------------------
-            function alertPrize(indicatedSegment) {
-                selectedSegmentIndex = theWheel.segments.findIndex(s => s?.text == indicatedSegment.text)
-                showMessage(indicatedSegment.message)
-            }
-
-            function showMessage(message) {
-                messageText.innerHTML = message;
-                messageModal.style = "display: block;"
-                clappingSound.play();
-            }
-
-            function hideMessage() {
-                messageModal.style = "display: none;"
-                clappingSound.pause();
-                clappingSound.currentTime = 0;
-            }
-        </script>
+        <script type="text/javascript" src="./js/Winwheel.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+        <script src="js/main.js?val=1"></script>
 </body>
 
 </html>

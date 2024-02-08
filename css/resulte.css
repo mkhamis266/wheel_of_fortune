@@ -1,0 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    position: relative;
+}
+
+.resultPage
+{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+.content
+{
+    width: 50%;
+    min-width: 350px;
+    height: 50%;
+    margin: 20vh auto;
+    background-color: #eee;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+.newGame
+{
+    border-color: teal;
+    text-decoration: #fff;
+    columns: teal;
+    border-radius: 15px;
+    border: 2px blue solid;
+    padding: 10px 20px;
+}
