@@ -44,7 +44,7 @@ table.power
 
 table.power th
 {
-    background-color: white;
+    background-color: #000;
     cursor: default;
 }
 /* Style applied to the spin button once a power has been selected */
@@ -104,7 +104,7 @@ table.power th
 .heading-primary {
   font-size: 36px;
   font-weight: 600;
-  background-image: linear-gradient(to right, #f7bb97, #dd5e89);
+  background-color: #e1c88f;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: scale(1.6);
@@ -159,7 +159,8 @@ table.power th
   justify-content: space-between;
   padding: 20px;
   border-radius: 30px;
-  background-image: linear-gradient(to bottom, #734b6d, #42275a);
+  background-color: #050008;
+  color: color: hsl(221, 100%, 96%);;
   animation: gradient 9s infinite alternate linear;
 
 }
@@ -188,8 +189,8 @@ table.power th
 .btn {
   width: 240px;
   padding: 10px;
-  color: #ffffff;
-  background-color: #aa076b;
+  color: #050008;
+  background-color: #e1c88f;;
   border: none;
   border-radius: 100px;
   font-size: 14px;
@@ -204,4 +205,13 @@ table.power th
 #messageText
 {
     font-size: 28px;
+}
+
+.resultPage
+{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
 }
